@@ -1,0 +1,48 @@
+{
+    "variables": {
+        "aws_access_key": "",
+        "aws_secret_key": "",
+        "region":         "us-east-1"
+    },
+    "builders": [
+        {
+            "access_key": "{{user `aws_access_key`}}",
+            "ami_name": "backend-cloudcamp-{{timestamp}}",
+            "instance_type": "t2.micro",
+            "region": "us-east-1",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "source_ami_filter": {
+              "filters": {
+              "virtualization-type": "hvm",
+              "name": "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-20190722.1",
+              "root-device-type": "ebs"
+              },
+              "owners": ["099720109477"],
+              "most_recent": true
+            },
+            "ssh_username": "ubuntu",
+            "vpc_id": "vpc-050b3330f9da4ce2a",
+            "subnet_id": "subnet-0e141b65c5e1a1f60",
+            "associate_public_ip_address": "true",
+            "type": "amazon-ebs"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "./welcomefile",
+            "destination": "/home/ubuntu/"
+        },
+        {
+            "type": "shell",
+            "inline":[
+                "ls -al /home/ubuntu",
+                "cat /home/ubuntu/welcomefile"
+            ]
+        },
+        {
+            "type": "shell",
+            "script": "./install_backend.sh"
+        }
+    ]
+}
