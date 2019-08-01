@@ -41,6 +41,10 @@ resource "aws_route_table" "rtb_public" {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
+
+  tags = {
+    Name = "RT-CLOUDURBANS"
+  }
 }
 
 resource "aws_route_table_association" "rta_subnet_public_1a" {
