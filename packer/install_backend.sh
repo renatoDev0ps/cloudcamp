@@ -36,3 +36,4 @@ sudo systemctl status codedeploy-agent
 echo "Fim de instalacao das Dependencias"
 
 # base64:kxji8fQ6H9yezSu7cy8Gq0lpysEK+oBi2BgVVM7uFtA=
+# packer build <file_name>
